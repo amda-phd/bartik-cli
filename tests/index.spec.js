@@ -22,6 +22,8 @@ describe("When invoqued", () => {
             ]);
             expect(app.status).toBe(0);
             expect(app.stderr.toString()).toBeFalsy();
+            expect(app.stdout.toString()).toContain("h_max");
+            expect(app.stdout.toString()).toContain("x_max");
           });
         });
 

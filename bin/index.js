@@ -5,6 +5,7 @@ const { program } = require("commander");
 
 const { version, description } = require("@pack");
 const validate = require("@val");
+const compute = require("@compute");
 
 const DEFAULT_INPUT = "initialValues.json";
 const DEFAULT_OUTPUT = "results.json;";
@@ -35,10 +36,10 @@ program
   )
   .parse();
 
-validate(program.opts());
+const options = program.opts();
+validate(options);
+console.table(compute(options));
 
-// TODO: Validate input, set default inputs
-// TODO: Select the way to introduce the data (JSON or Manual)
-// TODO: Compute the maximum height of the projectile
-// TODO: Compute the maximum traveled distance
+// TODO: Parse JSON input
+// TODO: Parse JSON with multiple inputs
 // TODO: Save the computed data (Inputs + Results) into a file

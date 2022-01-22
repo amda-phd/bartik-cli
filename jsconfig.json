@@ -7,6 +7,7 @@
     "paths": {
       "Bin/*": ["./bin/*"],
       "Lib/*": ["./lib/*"],
+      "@compute": ["./lib/compute.js"],
       "@index": ["./bin/index.js"],
       "@pack": ["./package.json"],
       "@val": ["./lib/validation.js"]
