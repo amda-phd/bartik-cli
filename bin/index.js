@@ -5,6 +5,7 @@ const { program } = require("commander");
 
 const { version, description } = require("@pack");
 const validate = require("@val");
+const digest = require("@digest");
 const compute = require("@compute");
 
 const DEFAULT_INPUT = "initialValues.json";
@@ -26,7 +27,7 @@ program
     "Add this in order to use alpha in degrees instead of radians"
   )
   .option(
-    "-j, --JSON [inputFileName]",
+    "-j, --json [inputFileName]",
     `Compute ballistics for the values contained in a JSON file. If no filename is provided, the program will look for ./${DEFAULT_INPUT}`
   )
   .option(
@@ -36,10 +37,10 @@ program
   )
   .parse();
 
-const options = program.opts();
-validate(options);
-console.table(compute(options));
+const opts = program.opts();
+validate(opts);
+const initialValues = digest(opts);
+console.table(compute(initialValues));
 
-// TODO: Parse JSON input
 // TODO: Parse JSON with multiple inputs
 // TODO: Save the computed data (Inputs + Results) into a file

@@ -49,6 +49,7 @@
     "Bin": "bin",
     "Lib": "lib",
     "@compute": "lib/compute.js",
+    "@digest": "lib/digestInput.js",
     "@index": "bin/index.js",
     "@pack": "package.json",
     "@val": "lib/validation.js"

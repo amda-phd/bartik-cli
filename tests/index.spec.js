@@ -4,8 +4,13 @@ const { spawnSync } = require("child_process");
 const appFilePath = path.join(__dirname, "../bin/index.js");
 
 describe("When invoqued", () => {
-  describe.skip("Without any options", () => {
-    it("Attempts to run calculations on default JSON file", () => {});
+  describe("Without any options", () => {
+    it("Attempts to run calculations on default JSON file", () => {
+      const app = spawnSync("node", [appFilePath]);
+      expect(app.status).toBe(0);
+      expect(app.stderr.toString()).toBeFalsy();
+      expect(app.stdout.toString()).toContain("h_max");
+    });
   });
 
   describe("With initial velocity", () => {
@@ -59,7 +64,7 @@ describe("When invoqued", () => {
         });
       });
 
-      describe("And --JSON", () => {
+      describe("And --json", () => {
         it("Throws a helpful error", () => {
           const app = spawnSync("node", [
             appFilePath,
@@ -67,12 +72,10 @@ describe("When invoqued", () => {
             10,
             "--alpha",
             Math.PI / 10,
-            "--JSON",
+            "--json",
           ]);
           expect(app.status).toBe(1);
-          expect(app.stderr.toString()).toContain(
-            "conflict between exclusive peers"
-          );
+          expect(app.stderr.toString()).toContain("is not allowed");
         });
       });
     });
@@ -93,6 +96,71 @@ describe("When invoqued", () => {
         const app = spawnSync("node", [appFilePath, "-v0"]);
         expect(app.stdout.toString()).toBeFalsy();
         expect(app.stderr.toString()).toContain("argument missing");
+      });
+    });
+  });
+
+  describe("With --json", () => {
+    describe("Correctly parsed", () => {
+      it("Computes the trajectory", () => {
+        const app = spawnSync("node", [appFilePath, "--json"]);
+        expect(app.status).toBe(0);
+        expect(app.stderr.toString()).toBeFalsy();
+        expect(app.stdout.toString()).toContain("h_max");
+      });
+    });
+
+    describe("Providing file name", () => {
+      describe("Without json extension", () => {
+        it("Computes the trajectory", () => {
+          const app = spawnSync("node", [
+            appFilePath,
+            "--json",
+            "./tests/fixtures/customName",
+          ]);
+          expect(app.status).toBe(0);
+          expect(app.stderr.toString()).toBeFalsy();
+          expect(app.stdout.toString()).toContain("h_max");
+        });
+      });
+
+      describe("With json extension", () => {
+        it("Computes the trajectory", () => {
+          const app = spawnSync("node", [
+            appFilePath,
+            "--json",
+            "./tests/fixtures/customName.json",
+          ]);
+          expect(app.status).toBe(0);
+          expect(app.stderr.toString()).toBeFalsy();
+          expect(app.stdout.toString()).toContain("h_max");
+        });
+      });
+
+      describe("Invalid", () => {
+        it("Throws a helpful error", () => {
+          const app = spawnSync("node", [
+            appFilePath,
+            "--json",
+            "./tests/fixtures/nope",
+          ]);
+          expect(app.status).toBe(1);
+          expect(app.stderr.toString()).toContain("Invalid source file name");
+        });
+      });
+
+      describe("Badly parsed", () => {
+        it("Computes the trajectory", () => {
+          const app = spawnSync("node", [
+            appFilePath,
+            "--json",
+            "./tests/fixtures/badFile",
+          ]);
+          expect(app.status).toBe(1);
+          expect(app.stderr.toString()).toContain(
+            'missing required peer "alpha"'
+          );
+        });
       });
     });
   });
