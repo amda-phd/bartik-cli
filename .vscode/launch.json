@@ -12,7 +12,10 @@
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["jest"],
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "env": {
+        "DEBUG": "true"
+      }
     }
   ]
 }
