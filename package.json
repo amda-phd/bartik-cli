@@ -7,7 +7,8 @@
     "lint": "eslint . --ext .js",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
-    "report:todo": "rm -rf todo.md && leasot --exit-nicely --reporter markdown \"./**/*.js\" --ignore \"node_modules/**/*.js\" > todo.md && code -r todo.md"
+    "report:todo": "rm -rf todo.md && leasot --exit-nicely --reporter markdown \"./**/*.js\" --ignore \"node_modules/**/*.js\" > todo.md && code -r todo.md",
+    "test": "jest"
   },
   "bin": {
     "bartik": "./bin/index.js"
@@ -31,7 +32,9 @@
   "devDependencies": {
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.7.0",
     "husky": "^7.0.4",
+    "jest": "^27.4.7",
     "leasot": "^12.0.0"
   }
 }
