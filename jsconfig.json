@@ -6,8 +6,10 @@
     "baseUrl": ".",
     "paths": {
       "Bin/*": ["./bin/*"],
+      "Lib/*": ["./lib/*"],
       "@index": ["./bin/index.js"],
-      "@pack": ["./package.json"]
+      "@pack": ["./package.json"],
+      "@val": ["./lib/validation.js"]
     }
   },
   "exclude": ["node_modules"]

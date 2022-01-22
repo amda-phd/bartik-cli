@@ -42,12 +42,15 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
+    "joi": "^17.5.0",
     "module-alias": "^2.2.2"
   },
   "_moduleAliases": {
     "Bin": "bin",
+    "Lib": "lib",
     "@index": "bin/index.js",
-    "@pack": "package.json"
+    "@pack": "package.json",
+    "@val": "lib/validation.js"
   },
   "nodemonConfig": {
     "exec": "npm install -g .",

@@ -2,10 +2,9 @@
 
 require("module-alias/register");
 const { program } = require("commander");
-const chalk = require("chalk");
-const { log } = console;
 
 const { version, description } = require("@pack");
+const validate = require("@val");
 
 const DEFAULT_INPUT = "initialValues.json";
 const DEFAULT_OUTPUT = "results.json;";
@@ -14,13 +13,20 @@ program
   .description(description)
   .version(version)
   .option(
-    "-m, --manual <initialVelocity, alpha>",
-    "Introduce initial velocity and inclination manually, separated by a comma"
+    "-v0, --initialVelocity <v0>",
+    "Projectile's initial velocity in m/s^2. Required for manual input"
+  )
+  .option(
+    "-a, --alpha <alpha>",
+    "Projectile's initial inclination in radians. Use the option --degrees for degrees"
+  )
+  .option(
+    "-d, --degrees",
+    "Add this in order to use alpha in degrees instead of radians"
   )
   .option(
     "-j, --JSON [inputFileName]",
-    `Compute ballistics for the values contained in a JSON file. If no filename is provided, the program will look for ./${DEFAULT_INPUT}`,
-    DEFAULT_INPUT
+    `Compute ballistics for the values contained in a JSON file. If no filename is provided, the program will look for ./${DEFAULT_INPUT}`
   )
   .option(
     "-o, --output [outputFileName]",
@@ -29,9 +35,7 @@ program
   )
   .parse();
 
-log(chalk.blue("Hello World!"));
-const options = program.opts();
-if (options.initialVelocity) console.log(options.initialVelocity);
+validate(program.opts());
 
 // TODO: Validate input, set default inputs
 // TODO: Select the way to introduce the data (JSON or Manual)
