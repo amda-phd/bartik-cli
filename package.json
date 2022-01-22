@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .js",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install",
+    "report:todo": "rm -rf todo.md && leasot --exit-nicely --reporter markdown \"./**/*.js\" --ignore \"node_modules/**/*.js\" > todo.md && code -r todo.md"
   },
   "bin": {
     "bartik": "./bin/index.js"
@@ -28,6 +30,8 @@
   "homepage": "https://github.com/amda-phd/bartik-cli#readme",
   "devDependencies": {
     "eslint": "^8.7.0",
-    "eslint-config-prettier": "^8.3.0"
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "leasot": "^12.0.0"
   }
 }
