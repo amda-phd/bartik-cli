@@ -1,6 +1,6 @@
 {
   "name": "bartik",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Do you need anything bombed? This is your CLI!",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
     "report:todo": "rm -rf todo.md && leasot --exit-nicely --reporter markdown \"./**/*.js\" --ignore \"node_modules/**/*.js\" > todo.md && code -r todo.md",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch --runInBand --detectOpenHandles --coverage=false --verbose=false"
   },
   "bin": {
     "bartik": "./bin/index.js"
@@ -35,14 +36,22 @@
     "eslint-plugin-jest": "^25.7.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
-    "leasot": "^12.0.0"
+    "leasot": "^12.0.0",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "commander": "^8.3.0",
     "module-alias": "^2.2.2"
   },
   "_moduleAliases": {
     "Bin": "bin",
     "@index": "bin/index.js",
     "@pack": "package.json"
+  },
+  "nodemonConfig": {
+    "exec": "npm install -g .",
+    "ignore": [
+      "tests/"
+    ]
   }
 }
