@@ -7,9 +7,10 @@ const { version, description } = require("@pack");
 const validate = require("@val");
 const digest = require("@digest");
 const compute = require("@compute");
+const processOutput = require("@out");
 
 const DEFAULT_INPUT = "initialValues.json";
-const DEFAULT_OUTPUT = "results.json;";
+const DEFAULT_OUTPUT = "results.json";
 
 program
   .description(description)
@@ -40,7 +41,9 @@ program
 const opts = program.opts();
 validate(opts);
 const initialValues = digest(opts);
-console.table(compute(initialValues));
+const response = compute(initialValues);
+console.table(response);
+processOutput(response, opts.output);
 
 // TODO: Parse JSON with multiple inputs
-// TODO: Save the computed data (Inputs + Results) into a file
+// TODO: Make output file optional

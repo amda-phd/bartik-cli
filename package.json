@@ -51,6 +51,7 @@
     "@compute": "lib/compute.js",
     "@digest": "lib/digestInput.js",
     "@index": "bin/index.js",
+    "@out": "lib/processOutput.js",
     "@pack": "package.json",
     "@val": "lib/validation.js"
   },
