@@ -1,9 +1,11 @@
 {
   "name": "bartik",
   "version": "1.0.0",
-  "description": "Do you need anything bombed? This is your cli!",
+  "description": "Do you need anything bombed? This is your CLI!",
   "main": "index.js",
-  "scripts": {},
+  "bin": {
+    "bartik": "./bin/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amda-phd/bartik-cli.git"
