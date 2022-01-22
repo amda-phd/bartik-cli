@@ -16,6 +16,15 @@
       "env": {
         "DEBUG": "true"
       }
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Program",
+      "skipFiles": ["<node_internals>/**"],
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": ["./bin/index.js"],
+      "console": "integratedTerminal"
     }
   ]
 }
