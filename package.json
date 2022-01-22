@@ -40,6 +40,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "module-alias": "^2.2.2"
   },
